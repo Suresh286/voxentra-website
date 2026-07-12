@@ -1,0 +1,270 @@
+/**
+ * Voxentra AI Design Tokens v1.0
+ *
+ * Platform-scale token system. Dark-first. Timeless, enterprise-grade.
+ * Supports future surfaces: marketing site, API docs, developer portal,
+ * marketplace, customer dashboard, and enterprise portal — without redesign.
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* ─── Brand (Voxentra logo palette) ─────────────────────────────────── */
+  --color-brand-primary: #9333ea;
+  --color-brand-primary-rgb: 147 51 234;
+  --color-brand-secondary: #7c3aed;
+  --color-brand-secondary-rgb: 124 58 237;
+  --color-brand-accent: #06b6d4;
+  --color-brand-accent-rgb: 6 182 212;
+  --color-brand-highlight: #e8ecf4;
+  --color-brand-highlight-rgb: 232 236 244;
+
+  /* ─── Neutral (dark mode — default) ─────────────────────────────────── */
+  --color-neutral-background: #05070a;
+  --color-neutral-background-rgb: 5 7 10;
+  --color-neutral-surface: #12151c;
+  --color-neutral-surface-rgb: 18 21 28;
+  --color-neutral-card: #181c26;
+  --color-neutral-card-rgb: 24 28 38;
+  --color-neutral-border: #252a38;
+  --color-neutral-border-rgb: 37 42 56;
+  --color-neutral-divider: #1e2330;
+  --color-neutral-divider-rgb: 30 35 48;
+
+  /* ─── Typography colors ───────────────────────────────────────────────── */
+  --color-text-heading: #f4f6fa;
+  --color-text-body: #c8ced9;
+  --color-text-secondary: #9aa3b5;
+  --color-text-muted: #6b7489;
+  --color-text-disabled: #4a5163;
+
+  /* ─── Status ────────────────────────────────────────────────────────── */
+  --color-status-success: #34d399;
+  --color-status-warning: #fbbf24;
+  --color-status-error: #f87171;
+  --color-status-info: #60a5fa;
+
+  /* ─── Interactive (derived from primary) ────────────────────────────── */
+  --color-interactive-hover: #a855f7;
+  --color-interactive-active: #7e22ce;
+  --color-interactive-focus: #9333ea;
+  --color-interactive-selected: rgb(147 51 234 / 0.12);
+  --color-interactive-selected-border: rgb(147 51 234 / 0.4);
+  --color-interactive-focus-ring: rgb(147 51 234 / 0.4);
+
+  /* ─── Gradients ─────────────────────────────────────────────────────── */
+  --gradient-brand-primary: linear-gradient(135deg, #9333ea 0%, #2563eb 100%);
+  --gradient-brand-wordmark: linear-gradient(90deg, #9333ea 0%, #06b6d4 100%);
+  --gradient-hero: radial-gradient(
+      ellipse 70% 55% at 15% 0%,
+      rgb(147 51 234 / 0.18) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      ellipse 60% 50% at 85% 10%,
+      rgb(6 182 212 / 0.14) 0%,
+      transparent 60%
+    );
+  --gradient-cta: linear-gradient(135deg, #9333ea 0%, #06b6d4 100%);
+  --gradient-glow: radial-gradient(
+      ellipse 50% 40% at 80% 50%,
+      rgb(6 182 212 / 0.08) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 40% 50% at 20% 80%,
+      rgb(147 51 234 / 0.1) 0%,
+      transparent 60%
+    );
+
+  /* ─── Radius ────────────────────────────────────────────────────────── */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-full: 9999px;
+
+  /* ─── Shadows (dark mode: border + glow, not drop shadows) ────────────── */
+  --shadow-glow-sm: 0 0 20px rgb(147 51 234 / 0.18);
+  --shadow-glow-md: 0 0 40px rgb(147 51 234 / 0.14);
+  --shadow-glow-accent: 0 0 32px rgb(6 182 212 / 0.12);
+  --shadow-inner-highlight: inset 0 1px 0 rgb(255 255 255 / 0.04);
+
+  /* ─── Spacing (4px base grid) ───────────────────────────────────────── */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  /* ─── Layout (platform-scale containers) ────────────────────────────── */
+  --layout-max-marketing: 1280px;
+  --layout-max-content: 720px;
+  --layout-max-docs: 1440px;
+  --layout-max-dashboard: 1600px;
+  --layout-gutter-mobile: 24px;
+  --layout-gutter-tablet: 32px;
+  --layout-gutter-desktop: 40px;
+  --layout-navbar-height: 72px;
+
+  /* ─── Brand lockup (navbar) ─────────────────────────────────────────── */
+  --logo-mark-size: 38px;
+  --logo-mark-size-md: 42px;
+  --logo-lockup-gap: var(--space-4);
+  --logo-nav-inset: var(--space-2);
+
+  /* ─── Brand lockup (footer) ─────────────────────────────────────────── */
+  --logo-footer-max-width: 272px;
+  --logo-footer-max-width-md: 304px;
+  --logo-footer-inset: var(--space-2);
+  --logo-footer-padding-block: var(--space-3);
+  --logo-footer-padding-inline-end: var(--space-4);
+  --logo-footer-section-gap: var(--space-6);
+
+  /* ─── Glass surfaces (subtle depth) ─────────────────────────────────── */
+  --surface-glass: rgb(var(--color-neutral-background-rgb) / 0.55);
+  --surface-glass-scrolled: rgb(var(--color-neutral-background-rgb) / 0.82);
+  --surface-glass-panel: rgb(var(--color-neutral-surface-rgb) / 0.92);
+
+  /* ─── Opacity ───────────────────────────────────────────────────────── */
+  --opacity-disabled: 0.4;
+  --opacity-muted: 0.6;
+  --opacity-hover-overlay: 0.08;
+  --opacity-selected: 0.12;
+  --opacity-scrim: 0.72;
+  --opacity-gradient-max: 0.15;
+  --opacity-gradient-ambient: 0.08;
+
+  /* ─── Motion (timeless — no trendy effects) ─────────────────────────── */
+  --duration-instant: 100ms;
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --duration-entrance: 600ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+
+  /* ─── Typography scale ──────────────────────────────────────────────── */
+  --text-display-xl: 4.5rem;
+  --text-display-lg: 3.5rem;
+  --text-display-md: 2.5rem;
+  --text-heading-lg: 2rem;
+  --text-heading-md: 1.5rem;
+  --text-heading-sm: 1.25rem;
+  --text-body-lg: 1.125rem;
+  --text-body-md: 1rem;
+  --text-body-sm: 0.875rem;
+  --text-label: 0.75rem;
+
+  --leading-display: 1.05;
+  --leading-heading: 1.2;
+  --leading-body: 1.6;
+  --leading-label: 1.4;
+
+  --tracking-display: -0.03em;
+  --tracking-heading: -0.015em;
+  --tracking-label: 0.04em;
+
+  /* ─── shadcn/ui semantic aliases (dark default — map to Voxentra tokens) ─ */
+  --background: var(--color-neutral-background);
+  --foreground: var(--color-text-body);
+  --card: var(--color-neutral-card);
+  --card-foreground: var(--color-text-heading);
+  --popover: var(--color-neutral-surface);
+  --popover-foreground: var(--color-text-heading);
+  --primary: var(--color-brand-primary);
+  --primary-foreground: #ffffff;
+  --secondary: var(--color-neutral-surface);
+  --secondary-foreground: var(--color-text-body);
+  --muted: var(--color-neutral-surface);
+  --muted-foreground: var(--color-text-muted);
+  --accent: var(--color-brand-accent);
+  --accent-foreground: var(--color-neutral-background);
+  --destructive: var(--color-status-error);
+  --border: var(--color-neutral-border);
+  --input: var(--color-neutral-border);
+  --ring: var(--color-interactive-focus);
+  --radius: var(--radius-md);
+  --chart-1: var(--color-brand-primary);
+  --chart-2: var(--color-brand-accent);
+  --chart-3: var(--color-status-info);
+  --chart-4: var(--color-status-success);
+  --chart-5: var(--color-status-warning);
+  --sidebar: var(--color-neutral-surface);
+  --sidebar-foreground: var(--color-text-body);
+  --sidebar-primary: var(--color-brand-primary);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--color-neutral-card);
+  --sidebar-accent-foreground: var(--color-text-heading);
+  --sidebar-border: var(--color-neutral-border);
+  --sidebar-ring: var(--color-interactive-focus);
+
+  /* Font aliases */
+  --font-sans: var(--font-body);
+}
+
+/* Light mode — explicit opt-in for docs, emails, future surfaces */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --color-neutral-background: #fafbfd;
+  --color-neutral-background-rgb: 250 251 253;
+  --color-neutral-surface: #f3f5f8;
+  --color-neutral-surface-rgb: 243 245 248;
+  --color-neutral-card: #ffffff;
+  --color-neutral-card-rgb: 255 255 255;
+  --color-neutral-border: #e2e6ed;
+  --color-neutral-border-rgb: 226 230 237;
+  --color-neutral-divider: #e8ebf0;
+  --color-neutral-divider-rgb: 232 235 240;
+
+  --color-text-heading: #0f1219;
+  --color-text-body: #3d4557;
+  --color-text-secondary: #6b7489;
+  --color-text-muted: #9aa3b5;
+  --color-text-disabled: #c8ced9;
+
+  --shadow-glow-sm: 0 1px 2px rgb(0 0 0 / 0.04);
+  --shadow-glow-md: 0 4px 16px rgb(0 0 0 / 0.08);
+  --shadow-glow-accent: 0 4px 24px rgb(46 196 182 / 0.12);
+  --shadow-inner-highlight: none;
+
+  /* shadcn/ui semantic aliases (light mode) */
+  --background: var(--color-neutral-background);
+  --foreground: var(--color-text-body);
+  --card: var(--color-neutral-card);
+  --card-foreground: var(--color-text-heading);
+  --popover: var(--color-neutral-surface);
+  --popover-foreground: var(--color-text-heading);
+  --primary: var(--color-brand-primary);
+  --primary-foreground: #ffffff;
+  --secondary: var(--color-neutral-surface);
+  --secondary-foreground: var(--color-text-body);
+  --muted: var(--color-neutral-surface);
+  --muted-foreground: var(--color-text-muted);
+  --accent: var(--color-brand-accent);
+  --accent-foreground: #ffffff;
+  --destructive: var(--color-status-error);
+  --border: var(--color-neutral-border);
+  --input: var(--color-neutral-border);
+  --ring: var(--color-interactive-focus);
+  --sidebar: var(--color-neutral-surface);
+  --sidebar-foreground: var(--color-text-body);
+  --sidebar-primary: var(--color-brand-primary);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--color-neutral-card);
+  --sidebar-accent-foreground: var(--color-text-heading);
+  --sidebar-border: var(--color-neutral-border);
+  --sidebar-ring: var(--color-interactive-focus);
+}
