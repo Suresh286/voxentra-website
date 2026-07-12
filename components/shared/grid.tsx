@@ -3,10 +3,12 @@ import { cn } from "@/lib/utils";
 export type GridColumns = 2 | 3 | 4;
 
 const columnClasses: Record<GridColumns, string> = {
-  2: "grid-cols-1 sm:grid-cols-2",
-  3: "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
+  2: "grid-cols-1 md:grid-cols-2",
+  3: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
   4: "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4",
 };
+
+export { columnClasses as gridColumnClasses };
 
 type GridProps = React.ComponentProps<"div"> & {
   columns?: GridColumns;

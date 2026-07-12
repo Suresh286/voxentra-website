@@ -2,6 +2,12 @@ import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { Heading } from "@/components/shared/heading";
 import type { FaqCategory, PageSection } from "@/content/types/pages";
+import {
+  bodyColorForTone,
+  elevatedPanelClassesForTone,
+  elevatedSectionBorderClasses,
+  titleColorForTone,
+} from "@/lib/marketing-styles";
 import { cn } from "@/lib/utils";
 
 type CategorizedFaqSectionProps = {
@@ -15,8 +21,15 @@ function CategorizedFaqSection({
   categories,
   id = "faq",
 }: CategorizedFaqSectionProps) {
+  const tone = "elevated" as const;
+
   return (
-    <Section id={id} aria-labelledby={`${id}-heading`} background="transparent">
+    <Section
+      id={id}
+      aria-labelledby={`${id}-heading`}
+      background="elevated"
+      className={elevatedSectionBorderClasses}
+    >
       <Container>
         <div className="mx-auto flex max-w-3xl flex-col gap-[var(--space-12)]">
           {intro ? (
@@ -27,7 +40,8 @@ function CategorizedFaqSection({
               title={intro.headline}
               description={intro.supportingCopy}
               align="center"
-              className="gap-[var(--space-3)] [&_h2]:text-balance [&_p]:text-pretty"
+              tone={tone}
+              className="gap-[var(--space-3)]"
             />
           ) : null}
 
@@ -40,25 +54,31 @@ function CategorizedFaqSection({
             >
               <h2
                 id={`${category.id}-heading`}
-                className="font-display text-heading-sm font-semibold text-text-heading"
+                className={cn(
+                  "font-display text-heading-sm font-semibold",
+                  titleColorForTone(tone),
+                )}
               >
                 {category.title}
               </h2>
 
               <dl className="flex flex-col gap-[var(--space-4)]">
                 {category.items.map((item) => (
-                  <div
-                    key={item.question}
-                    className={cn(
-                      "rounded-xl border border-neutral-border/80 bg-[var(--surface-glass-panel)] p-[var(--space-5)] backdrop-blur-sm",
-                      "transition-[border-color,box-shadow] duration-[var(--duration-normal)]",
-                      "hover:border-brand-primary/20 hover:shadow-[var(--shadow-glow-sm)]",
-                    )}
-                  >
-                    <dt className="font-display text-body-md font-semibold text-text-heading">
+                  <div key={item.question} className={elevatedPanelClassesForTone(tone)}>
+                    <dt
+                      className={cn(
+                        "font-display text-body-md font-semibold",
+                        titleColorForTone(tone),
+                      )}
+                    >
                       {item.question}
                     </dt>
-                    <dd className="mt-[var(--space-3)] text-body-sm leading-relaxed text-pretty text-text-secondary">
+                    <dd
+                      className={cn(
+                        "mt-[var(--space-3)] text-body-sm leading-relaxed text-pretty",
+                        bodyColorForTone(tone),
+                      )}
+                    >
                       {item.answer}
                     </dd>
                   </div>

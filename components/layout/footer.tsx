@@ -23,7 +23,7 @@ function Footer() {
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-primary/20 to-transparent"
       />
 
-      <Container className="py-[var(--space-20)] md:py-[var(--space-24)]">
+      <Container className="py-[var(--space-16)] sm:py-[var(--space-20)] md:py-[var(--space-24)]">
         <div className="flex flex-col gap-[var(--space-16)] lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-xs lg:max-w-sm">
             <Logo variant="full" />
@@ -63,7 +63,7 @@ function Footer() {
             </Button>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-[var(--space-10)] gap-y-[var(--space-10)] sm:grid-cols-4 lg:gap-x-[var(--space-12)]">
+          <div className="grid min-w-0 grid-cols-2 gap-x-[var(--space-6)] gap-y-[var(--space-8)] sm:grid-cols-4 sm:gap-x-[var(--space-10)] lg:gap-x-[var(--space-12)]">
             {footerColumns.map((column) => (
               <div key={column.title}>
                 <h2 className="text-label text-text-muted">{column.title}</h2>

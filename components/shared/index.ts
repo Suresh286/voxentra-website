@@ -10,5 +10,7 @@ export {
   CardTitle,
 } from "./card";
 export { Divider } from "./divider";
-export { Grid, type GridColumns } from "./grid";
+export { Grid, type GridColumns, gridColumnClasses } from "./grid";
+export { ScrollReveal, ScrollRevealStagger } from "./scroll-reveal";
+export { WorkflowProgress } from "./workflow-progress";
 export { Heading, type HeadingVariant } from "./heading";

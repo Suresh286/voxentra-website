@@ -18,7 +18,7 @@ function PricingPage({ content }: PricingPageProps) {
         id="why-custom"
         content={{ ...content.whyCustom, items: content.whyCustom.reasons }}
         columns={2}
-        background="surface"
+        background="elevated"
       />
       <FeatureGridSection
         id="pricing-factors"
@@ -26,7 +26,7 @@ function PricingPage({ content }: PricingPageProps) {
       />
       <ChecklistSection id="included" content={content.included} />
       <PricingTiersSection content={content.tiers} />
-      <FaqSection content={content.faq} background="surface" />
+      <FaqSection content={content.faq} background="elevated" />
       <CtaBandSection content={content.finalCta} />
     </>
   );

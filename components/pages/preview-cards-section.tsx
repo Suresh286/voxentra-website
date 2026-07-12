@@ -1,31 +1,40 @@
 import { Container } from "@/components/layout/container";
-import { Section } from "@/components/layout/section";
+import { Section, type SectionBackground } from "@/components/layout/section";
 import { Badge } from "@/components/shared/badge";
 import { Card, CardContent } from "@/components/shared/card";
 import { Grid } from "@/components/shared/grid";
 import { Heading } from "@/components/shared/heading";
 import type { PageSection, PreviewCard } from "@/content/types/pages";
+import {
+  bodyColorForTone,
+  cardClassesForTone,
+  elevatedSectionBorderClasses,
+  sectionToneFromBackground,
+  titleColorForTone,
+} from "@/lib/marketing-styles";
 import { cn } from "@/lib/utils";
 
 type PreviewCardsSectionProps = {
   content: PageSection & { items: readonly PreviewCard[] };
   id?: string;
   columns?: 2 | 3;
-  background?: "default" | "surface" | "transparent";
+  background?: SectionBackground;
 };
 
 function PreviewCardsSection({
   content,
   id,
   columns = 3,
-  background = "transparent",
+  background = "elevated",
 }: PreviewCardsSectionProps) {
+  const tone = sectionToneFromBackground(background);
+
   return (
     <Section
       id={id}
       aria-labelledby={id ? `${id}-heading` : undefined}
       background={background}
-      className={background === "surface" ? "border-y border-neutral-divider" : undefined}
+      className={background === "elevated" ? elevatedSectionBorderClasses : undefined}
     >
       <Container>
         <div className="flex flex-col gap-[var(--space-10)] md:gap-[var(--space-12)]">
@@ -36,19 +45,13 @@ function PreviewCardsSection({
             title={content.headline}
             description={content.supportingCopy}
             align="center"
-            className="mx-auto max-w-3xl gap-[var(--space-3)] [&_h2]:text-balance [&_p]:text-pretty"
+            tone={tone}
+            className="mx-auto max-w-3xl gap-[var(--space-3)]"
           />
 
           <Grid columns={columns} className="gap-[var(--space-4)] md:gap-[var(--space-5)]">
             {content.items.map((item) => (
-              <Card
-                key={item.title}
-                className={cn(
-                  "h-full border-neutral-border/80 bg-[var(--surface-glass-panel)] backdrop-blur-sm",
-                  "transition-[border-color,box-shadow] duration-[var(--duration-normal)]",
-                  "hover:border-brand-primary/20 hover:shadow-[var(--shadow-glow-sm)]",
-                )}
-              >
+              <Card key={item.title} className={cardClassesForTone(tone)}>
                 <CardContent className="flex h-full flex-col gap-[var(--space-4)] p-[var(--space-5)] md:p-[var(--space-6)]">
                   <div className="flex flex-wrap items-center gap-[var(--space-2)]">
                     <Badge voxentraVariant="outline" className="text-label">
@@ -58,10 +61,20 @@ function PreviewCardsSection({
                       {item.status}
                     </Badge>
                   </div>
-                  <h3 className="font-display text-heading-sm font-semibold text-text-heading">
+                  <h3
+                    className={cn(
+                      "font-display text-heading-sm font-semibold",
+                      titleColorForTone(tone),
+                    )}
+                  >
                     {item.title}
                   </h3>
-                  <p className="flex-1 text-body-sm leading-relaxed text-pretty text-text-secondary">
+                  <p
+                    className={cn(
+                      "flex-1 text-body-sm leading-relaxed text-pretty",
+                      bodyColorForTone(tone),
+                    )}
+                  >
                     {item.description}
                   </p>
                 </CardContent>

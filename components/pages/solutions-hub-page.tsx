@@ -15,7 +15,7 @@ function SolutionsHubPage({ content }: SolutionsHubPageProps) {
       <FeatureGridSection
         id="overview"
         content={{ ...content.overview, items: content.overview.pillars }}
-        background="surface"
+        background="elevated"
       />
       <SolutionsGridSection content={content.solutions} />
       <FeatureGridSection

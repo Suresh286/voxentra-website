@@ -16,14 +16,14 @@ function VoiceAgentsPage({ content }: VoiceAgentsPageProps) {
       <FeatureGridSection
         id="overview"
         content={{ ...content.overview, items: content.overview.pillars }}
-        background="surface"
+        background="elevated"
       />
       <StepsSection id="call-handling" content={content.callHandling} />
       <BadgeListSection
         id="languages"
         content={{ ...content.languages, items: content.languages.items }}
         ariaLabel="Supported languages"
-        background="surface"
+        background="elevated"
       />
       <FeatureGridSection
         id="use-cases"
@@ -33,7 +33,7 @@ function VoiceAgentsPage({ content }: VoiceAgentsPageProps) {
       <FeatureGridSection
         id="outcomes"
         content={{ ...content.outcomes, items: content.outcomes.items }}
-        background="surface"
+        background="elevated"
       />
       <CtaBandSection content={content.finalCta} />
     </>

@@ -13,7 +13,7 @@ function BlogPage({ content }: BlogPageProps) {
   return (
     <>
       <PageHeroSection content={content.hero} />
-      <NarrativeSection id="featured" content={content.featured} background="surface" />
+      <NarrativeSection id="featured" content={content.featured} background="elevated" />
       <BadgeListSection
         id="categories"
         content={{ ...content.categories, items: content.categories.items }}
@@ -22,7 +22,7 @@ function BlogPage({ content }: BlogPageProps) {
       <ChallengeSection
         content={content.contentStrategy}
         id="content-strategy"
-        background="surface"
+        background="elevated"
       />
       <CtaBandSection content={content.finalCta} />
     </>

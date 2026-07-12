@@ -5,6 +5,12 @@ import { Section } from "@/components/layout/section";
 import { Badge } from "@/components/shared/badge";
 import { Button } from "@/components/shared/button";
 import type { LegalPageContent } from "@/content/types/pages";
+import {
+  bodyColorForTone,
+  elevatedSectionBorderClasses,
+  marketingElevatedSecondaryCtaClasses,
+  titleColorForTone,
+} from "@/lib/marketing-styles";
 import { cn } from "@/lib/utils";
 
 type LegalPageProps = {
@@ -12,6 +18,8 @@ type LegalPageProps = {
 };
 
 function LegalPage({ content }: LegalPageProps) {
+  const tone = "elevated" as const;
+
   return (
     <>
       <Section
@@ -39,8 +47,8 @@ function LegalPage({ content }: LegalPageProps) {
       <Section
         id="legal-content"
         aria-labelledby="legal-document-heading"
-        background="surface"
-        className="border-y border-neutral-divider"
+        background="elevated"
+        className={elevatedSectionBorderClasses}
       >
         <Container>
           <article className="mx-auto max-w-3xl">
@@ -58,7 +66,10 @@ function LegalPage({ content }: LegalPageProps) {
                 >
                   <h2
                     id={`${section.id}-heading`}
-                    className="font-display text-heading-sm font-semibold text-text-heading"
+                    className={cn(
+                      "font-display text-heading-sm font-semibold",
+                      titleColorForTone(tone),
+                    )}
                   >
                     {section.title}
                   </h2>
@@ -66,7 +77,10 @@ function LegalPage({ content }: LegalPageProps) {
                   {section.paragraphs.map((paragraph) => (
                     <p
                       key={paragraph}
-                      className="text-body-sm leading-relaxed text-pretty text-text-body"
+                      className={cn(
+                        "text-body-sm leading-relaxed text-pretty",
+                        bodyColorForTone(tone),
+                      )}
                     >
                       {paragraph}
                     </p>
@@ -77,7 +91,10 @@ function LegalPage({ content }: LegalPageProps) {
                       {section.listItems.map((item) => (
                         <li
                           key={item}
-                          className="flex items-start gap-[var(--space-2)] text-body-sm leading-relaxed text-text-body"
+                          className={cn(
+                            "flex items-start gap-[var(--space-2)] text-body-sm leading-relaxed",
+                            bodyColorForTone(tone),
+                          )}
                         >
                           <span aria-hidden="true" className="mt-1.5 text-brand-accent">
                             ●
@@ -90,18 +107,32 @@ function LegalPage({ content }: LegalPageProps) {
                 </section>
               ))}
 
-              <footer className="flex flex-col gap-[var(--space-6)] border-t border-neutral-divider pt-[var(--space-8)]">
+              <footer className="flex flex-col gap-[var(--space-6)] border-t border-section-elevated pt-[var(--space-8)]">
                 <div className="flex flex-col gap-[var(--space-2)]">
-                  <p className="text-label text-text-muted">{content.lastUpdated.label}</p>
-                  <p className="text-body-sm text-text-body">{content.lastUpdated.date}</p>
+                  <p className={cn("text-label", bodyColorForTone(tone))}>
+                    {content.lastUpdated.label}
+                  </p>
+                  <p className={cn("text-body-sm", bodyColorForTone(tone))}>
+                    {content.lastUpdated.date}
+                  </p>
                 </div>
 
                 <div className="flex flex-col gap-[var(--space-3)]">
-                  <h2 className="font-display text-heading-sm font-semibold text-text-heading">
+                  <h2
+                    className={cn(
+                      "font-display text-heading-sm font-semibold",
+                      titleColorForTone(tone),
+                    )}
+                  >
                     {content.contact.headline}
                   </h2>
                   {content.contact.supportingCopy ? (
-                    <p className="text-body-sm leading-relaxed text-pretty text-text-secondary">
+                    <p
+                      className={cn(
+                        "text-body-sm leading-relaxed text-pretty",
+                        bodyColorForTone(tone),
+                      )}
+                    >
                       {content.contact.supportingCopy}
                     </p>
                   ) : null}
@@ -109,10 +140,7 @@ function LegalPage({ content }: LegalPageProps) {
                     voxentraVariant="outline"
                     nativeButton={false}
                     render={<Link href={`mailto:${content.contact.email}`} />}
-                    className={cn(
-                      "h-10 w-fit border-neutral-border bg-neutral-surface/50 px-6",
-                      "hover:border-brand-primary/50 hover:bg-interactive-selected",
-                    )}
+                    className={cn("h-10 w-fit px-6", marketingElevatedSecondaryCtaClasses)}
                   >
                     {content.contact.emailLabel}
                   </Button>

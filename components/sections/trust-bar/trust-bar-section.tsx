@@ -15,7 +15,7 @@ function TrustBar() {
     <Section
       id="platform-fundamentals"
       aria-labelledby="trust-bar-heading"
-      background="surface"
+      background="elevated"
       spacing={false}
       className="border-y border-neutral-divider py-[var(--space-16)] md:py-[var(--space-20)]"
     >

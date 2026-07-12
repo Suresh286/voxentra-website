@@ -1,7 +1,10 @@
 export { Hero, HeroVisual } from "./hero";
+export { StatsBanner } from "./stats-banner";
 export { TrustBar } from "./trust-bar";
 export { TrustedBy } from "./trusted-by";
 export { AiEmployee } from "./ai-employee";
 export { AiWorkforce } from "./ai-workforce";
 export { Solutions } from "./solutions";
 export { Industries } from "./industries";
+export { HowItWorks } from "./how-it-works";
+export { FinalCta } from "./final-cta";

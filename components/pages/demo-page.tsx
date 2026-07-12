@@ -17,7 +17,7 @@ function DemoPage({ content }: DemoPageProps) {
         id="why-book"
         content={{ ...content.whyBook, items: content.whyBook.reasons }}
         columns={2}
-        background="surface"
+        background="elevated"
       />
       <StepsSection id="what-happens" content={content.whatHappens} />
       <FeatureGridSection

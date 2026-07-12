@@ -1,13 +1,17 @@
 import Link from "next/link";
 
 import { Container } from "@/components/layout/container";
-import { navCtaClasses } from "@/components/layout/nav-styles";
 import { Section } from "@/components/layout/section";
 import { EmployeeProfileCard } from "@/components/sections/ai-workforce/employee-profile-card";
 import { Button } from "@/components/shared/button";
-import { Grid } from "@/components/shared/grid";
+import { gridColumnClasses } from "@/components/shared/grid";
 import { Heading } from "@/components/shared/heading";
+import { ScrollReveal, ScrollRevealStagger } from "@/components/shared/scroll-reveal";
 import { homeContent } from "@/content/home";
+import {
+  elevatedSectionBorderClasses,
+  marketingPrimaryCtaClasses,
+} from "@/lib/marketing-styles";
 import { cn } from "@/lib/utils";
 
 function toHeadingId(title: string) {
@@ -16,37 +20,36 @@ function toHeadingId(title: string) {
 
 function AiWorkforce() {
   const { aiWorkforce } = homeContent;
+  const tone = "elevated" as const;
 
   return (
     <Section
       id="meet-your-ai-workforce"
       aria-labelledby="ai-workforce-heading"
-      background="transparent"
-      className="relative overflow-hidden"
+      background="elevated"
+      className={elevatedSectionBorderClasses}
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[image:var(--gradient-glow)] opacity-50"
-      />
-
-      <Container className="relative">
+      <Container>
         <div className="flex flex-col gap-[var(--space-12)] md:gap-[var(--space-16)]">
-          <Heading
-            id="ai-workforce-heading"
-            variant="section"
-            eyebrow={aiWorkforce.eyebrow}
-            title={aiWorkforce.headline}
-            description={aiWorkforce.supportingCopy}
-            align="center"
-            className={cn(
-              "mx-auto max-w-3xl gap-[var(--space-3)] md:gap-[var(--space-4)]",
-              "[&_h2]:text-balance [&_p]:text-pretty",
-            )}
-          />
+          <ScrollReveal>
+            <Heading
+              id="ai-workforce-heading"
+              variant="section"
+              eyebrow={aiWorkforce.eyebrow}
+              title={aiWorkforce.headline}
+              description={aiWorkforce.supportingCopy}
+              align="center"
+              tone={tone}
+              className="mx-auto max-w-3xl gap-[var(--space-3)] md:gap-[var(--space-4)]"
+            />
+          </ScrollReveal>
 
-          <Grid
-            columns={3}
-            className="gap-[var(--space-4)] md:gap-[var(--space-5)]"
+          <ScrollRevealStagger
+            className={cn(
+              "grid w-full gap-[var(--space-4)] md:gap-[var(--space-5)]",
+              gridColumnClasses[3],
+            )}
+            staggerMs={100}
           >
             {aiWorkforce.employees.map((employee) => {
               const headingId = toHeadingId(employee.title);
@@ -61,29 +64,32 @@ function AiWorkforce() {
                     employee={employee}
                     fieldLabels={aiWorkforce.fieldLabels}
                     headingId={headingId}
+                    tone={tone}
                   />
                 </article>
               );
             })}
-          </Grid>
+          </ScrollRevealStagger>
 
           {aiWorkforce.primaryCta ? (
-            <div className="flex justify-center">
-              <Button
-                voxentraVariant="gradient"
-                nativeButton={false}
-                render={<Link href={aiWorkforce.primaryCta.href} />}
-                className={cn(navCtaClasses, "h-11 w-full px-6 sm:w-auto")}
-              >
-                {aiWorkforce.primaryCta.label}
-                <span
-                  aria-hidden="true"
-                  className="transition-transform duration-[var(--duration-fast)] group-hover/cta:translate-x-0.5"
+            <ScrollReveal delay={120}>
+              <div className="flex justify-center">
+                <Button
+                  voxentraVariant="gradient"
+                  nativeButton={false}
+                  render={<Link href={aiWorkforce.primaryCta.href} />}
+                  className={cn(marketingPrimaryCtaClasses, "w-full sm:w-auto")}
                 >
-                  →
-                </span>
-              </Button>
-            </div>
+                  {aiWorkforce.primaryCta.label}
+                  <span
+                    aria-hidden="true"
+                    className="transition-transform duration-[var(--duration-fast)] group-hover/cta:translate-x-0.5"
+                  >
+                    →
+                  </span>
+                </Button>
+              </div>
+            </ScrollReveal>
           ) : null}
         </div>
       </Container>

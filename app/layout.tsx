@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Footer, Navbar, SkipLink } from "@/components/layout";
@@ -23,6 +23,12 @@ const fontMono = JetBrains_Mono({
   variable: "--font-mono",
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   metadataBase: getSiteOrigin(),
@@ -76,10 +82,12 @@ export default function RootLayout({
       )}
       suppressHydrationWarning
     >
-      <body className="flex min-h-dvh flex-col bg-neutral-background bg-[image:var(--gradient-glow)]">
+      <body className="flex min-h-dvh flex-col bg-neutral-background bg-site-grid">
         <SkipLink />
         <Navbar />
-        {children}
+        <main id="main-content" tabIndex={-1} className="min-w-0 flex-1">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

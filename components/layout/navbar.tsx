@@ -145,7 +145,7 @@ function Navbar() {
       )}
     >
       <Container>
-        <div className="flex h-[var(--layout-navbar-height)] items-center justify-between gap-[var(--space-6)] lg:h-20">
+        <div className="flex h-[var(--layout-navbar-height)] items-center justify-between gap-[var(--space-3)] sm:gap-[var(--space-6)] lg:h-20">
           <Logo
             variant="compact"
             className="shrink-0 pl-[var(--logo-nav-inset)]"
@@ -160,8 +160,8 @@ function Navbar() {
             ))}
           </nav>
 
-          <div className="flex shrink-0 items-center gap-[var(--space-3)]">
-            <NavCtaButton className="hidden sm:inline-flex" />
+          <div className="flex shrink-0 items-center gap-[var(--space-2)] sm:gap-[var(--space-3)]">
+            <NavCtaButton className="hidden min-[480px]:inline-flex" />
 
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
               <SheetTrigger

@@ -16,7 +16,7 @@ function SecurityPage({ content }: SecurityPageProps) {
       <FeatureGridSection
         id="overview"
         content={{ ...content.overview, items: content.overview.pillars }}
-        background="surface"
+        background="elevated"
       />
       <FeatureGridSection
         id="data-protection"
@@ -27,7 +27,7 @@ function SecurityPage({ content }: SecurityPageProps) {
         id="access-controls"
         content={{ ...content.accessControls, items: content.accessControls.items }}
         columns={2}
-        background="surface"
+        background="elevated"
       />
       <FeatureGridSection
         id="auditability"
@@ -37,7 +37,7 @@ function SecurityPage({ content }: SecurityPageProps) {
       <ChallengeSection
         content={content.privacy}
         id="privacy"
-        background="surface"
+        background="elevated"
       />
       <FaqSection content={content.faq} />
       <CtaBandSection content={content.finalCta} />

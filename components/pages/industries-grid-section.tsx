@@ -1,5 +1,5 @@
 import { Container } from "@/components/layout/container";
-import { Section } from "@/components/layout/section";
+import { Section, type SectionBackground } from "@/components/layout/section";
 import { IndustryCard } from "@/components/sections/industries/industry-card";
 import { Grid } from "@/components/shared/grid";
 import { Heading } from "@/components/shared/heading";
@@ -8,7 +8,10 @@ import type {
   IndustryHubItem,
   PageSection,
 } from "@/content/types/pages";
-import { cn } from "@/lib/utils";
+import {
+  elevatedSectionBorderClasses,
+  sectionToneFromBackground,
+} from "@/lib/marketing-styles";
 
 function toHeadingId(title: string) {
   return `industry-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`;
@@ -20,20 +23,22 @@ type IndustriesGridSectionProps = {
     fieldLabels: IndustryHubFieldLabels;
   };
   id?: string;
-  background?: "default" | "surface" | "transparent";
+  background?: SectionBackground;
 };
 
 function IndustriesGridSection({
   content,
   id = "industries-grid",
-  background = "surface",
+  background = "elevated",
 }: IndustriesGridSectionProps) {
+  const tone = sectionToneFromBackground(background);
+
   return (
     <Section
       id={id}
       aria-labelledby={`${id}-heading`}
       background={background}
-      className={background === "surface" ? "border-y border-neutral-divider" : undefined}
+      className={background === "elevated" ? elevatedSectionBorderClasses : undefined}
     >
       <Container>
         <div className="flex flex-col gap-[var(--space-10)] md:gap-[var(--space-12)]">
@@ -44,10 +49,8 @@ function IndustriesGridSection({
             title={content.headline}
             description={content.supportingCopy}
             align="center"
-            className={cn(
-              "mx-auto max-w-3xl gap-[var(--space-3)]",
-              "[&_h2]:text-balance [&_p]:text-pretty",
-            )}
+            tone={tone}
+            className="mx-auto max-w-3xl gap-[var(--space-3)]"
           />
 
           <Grid columns={3} className="gap-[var(--space-4)] md:gap-[var(--space-5)]">
@@ -60,6 +63,7 @@ function IndustriesGridSection({
                     item={item}
                     fieldLabels={content.fieldLabels}
                     headingId={headingId}
+                    tone={tone}
                   />
                 </article>
               );

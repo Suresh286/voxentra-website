@@ -1,25 +1,35 @@
 import { Container } from "@/components/layout/container";
-import { Section } from "@/components/layout/section";
+import { Section, type SectionBackground } from "@/components/layout/section";
 import { Heading } from "@/components/shared/heading";
 import type { PageFaqItem, PageSection } from "@/content/types/pages";
+import {
+  bodyColorForTone,
+  elevatedPanelClassesForTone,
+  elevatedSectionBorderClasses,
+  sectionToneFromBackground,
+  titleColorForTone,
+} from "@/lib/marketing-styles";
 import { cn } from "@/lib/utils";
 
 type FaqSectionProps = {
   content: PageSection & { items: readonly PageFaqItem[] };
   id?: string;
-  background?: "default" | "surface" | "transparent";
+  background?: SectionBackground;
 };
 
 function FaqSection({
   content,
   id = "faq",
-  background = "transparent",
+  background = "elevated",
 }: FaqSectionProps) {
+  const tone = sectionToneFromBackground(background);
+
   return (
     <Section
       id={id}
       aria-labelledby={`${id}-heading`}
       background={background}
+      className={background === "elevated" ? elevatedSectionBorderClasses : undefined}
     >
       <Container>
         <div className="mx-auto flex max-w-3xl flex-col gap-[var(--space-10)]">
@@ -30,23 +40,27 @@ function FaqSection({
             title={content.headline}
             description={content.supportingCopy}
             align="center"
-            className="gap-[var(--space-3)] [&_h2]:text-balance [&_p]:text-pretty"
+            tone={tone}
+            className="gap-[var(--space-3)]"
           />
 
           <dl className="flex flex-col gap-[var(--space-4)]">
             {content.items.map((item) => (
-              <div
-                key={item.question}
-                className={cn(
-                  "rounded-xl border border-neutral-border/80 bg-[var(--surface-glass-panel)] p-[var(--space-5)] backdrop-blur-sm",
-                  "transition-[border-color,box-shadow] duration-[var(--duration-normal)]",
-                  "hover:border-brand-primary/20 hover:shadow-[var(--shadow-glow-sm)]",
-                )}
-              >
-                <dt className="font-display text-body-md font-semibold text-text-heading">
+              <div key={item.question} className={elevatedPanelClassesForTone(tone)}>
+                <dt
+                  className={cn(
+                    "font-display text-body-md font-semibold",
+                    titleColorForTone(tone),
+                  )}
+                >
                   {item.question}
                 </dt>
-                <dd className="mt-[var(--space-3)] text-body-sm leading-relaxed text-pretty text-text-secondary">
+                <dd
+                  className={cn(
+                    "mt-[var(--space-3)] text-body-sm leading-relaxed text-pretty",
+                    bodyColorForTone(tone),
+                  )}
+                >
                   {item.answer}
                 </dd>
               </div>

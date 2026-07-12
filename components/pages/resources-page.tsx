@@ -15,13 +15,13 @@ function ResourcesPage({ content }: ResourcesPageProps) {
       <FeatureGridSection
         id="categories"
         content={{ ...content.categories, items: content.categories.items }}
-        background="surface"
+        background="elevated"
       />
       <PreviewCardsSection id="guides" content={content.guides} />
       <PreviewCardsSection
         id="playbooks"
         content={content.playbooks}
-        background="surface"
+        background="elevated"
       />
       <PreviewCardsSection id="documentation" content={content.documentation} />
       <CtaBandSection content={content.finalCta} />

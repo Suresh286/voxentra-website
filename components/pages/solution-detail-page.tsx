@@ -22,12 +22,12 @@ function SolutionDetailPage({ content }: SolutionDetailPageProps) {
       />
       <WorkflowExampleSection
         content={content.workflow}
-        background="surface"
+        background="elevated"
       />
       <FeatureGridSection
         id="outcomes"
         content={{ ...content.outcomes, items: content.outcomes.items }}
-        background="surface"
+        background="elevated"
       />
       <FaqSection content={content.faq} />
       <CtaBandSection content={content.finalCta} />

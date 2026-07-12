@@ -1,24 +1,34 @@
 import { Container } from "@/components/layout/container";
-import { Section } from "@/components/layout/section";
+import { Section, type SectionBackground } from "@/components/layout/section";
 import { Badge } from "@/components/shared/badge";
 import { Heading } from "@/components/shared/heading";
 import type { PageSection } from "@/content/types/pages";
+import {
+  elevatedSectionBorderClasses,
+  sectionToneFromBackground,
+} from "@/lib/marketing-styles";
 
 type BadgeListSectionProps = {
   content: PageSection & { items: readonly string[] };
   id?: string;
-  background?: "default" | "surface" | "transparent";
+  background?: SectionBackground;
   ariaLabel: string;
 };
 
 function BadgeListSection({
   content,
   id,
-  background = "transparent",
+  background = "elevated",
   ariaLabel,
 }: BadgeListSectionProps) {
+  const tone = sectionToneFromBackground(background);
+
   return (
-    <Section id={id} background={background}>
+    <Section
+      id={id}
+      background={background}
+      className={background === "elevated" ? elevatedSectionBorderClasses : undefined}
+    >
       <Container>
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-[var(--space-8)] text-center">
           <Heading
@@ -27,9 +37,13 @@ function BadgeListSection({
             title={content.headline}
             description={content.supportingCopy}
             align="center"
-            className="gap-[var(--space-3)] [&_h2]:text-balance"
+            tone={tone}
+            className="gap-[var(--space-3)]"
           />
-          <ul className="flex flex-wrap justify-center gap-[var(--space-2)]" aria-label={ariaLabel}>
+          <ul
+            className="flex flex-wrap justify-center gap-[var(--space-2)]"
+            aria-label={ariaLabel}
+          >
             {content.items.map((item) => (
               <li key={item}>
                 <Badge

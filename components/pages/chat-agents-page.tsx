@@ -16,7 +16,7 @@ function ChatAgentsPage({ content }: ChatAgentsPageProps) {
       <FeatureGridSection
         id="overview"
         content={{ ...content.overview, items: content.overview.pillars }}
-        background="surface"
+        background="elevated"
       />
       <StepsSection id="customer-journey" content={content.customerJourney} />
       <FeatureGridSection
@@ -28,7 +28,7 @@ function ChatAgentsPage({ content }: ChatAgentsPageProps) {
         id="integrations"
         content={{ ...content.integrations, items: content.integrations.items }}
         ariaLabel="Chat integrations"
-        background="surface"
+        background="elevated"
       />
       <FeatureGridSection
         id="outcomes"

@@ -1,26 +1,32 @@
 import { Container } from "@/components/layout/container";
-import { Section } from "@/components/layout/section";
+import { Section, type SectionBackground } from "@/components/layout/section";
 import { Badge } from "@/components/shared/badge";
 import { Heading } from "@/components/shared/heading";
 import type { IntegrationCategory } from "@/content/types/pages";
+import {
+  elevatedSectionBorderClasses,
+  sectionToneFromBackground,
+} from "@/lib/marketing-styles";
 
 type IntegrationCategorySectionProps = {
   content: IntegrationCategory;
   id?: string;
-  background?: "default" | "surface" | "transparent";
+  background?: SectionBackground;
 };
 
 function IntegrationCategorySection({
   content,
   id,
-  background = "transparent",
+  background = "elevated",
 }: IntegrationCategorySectionProps) {
+  const tone = sectionToneFromBackground(background);
+
   return (
     <Section
       id={id}
       aria-labelledby={id ? `${id}-heading` : undefined}
       background={background}
-      className={background === "surface" ? "border-y border-neutral-divider" : undefined}
+      className={background === "elevated" ? elevatedSectionBorderClasses : undefined}
     >
       <Container>
         <div className="mx-auto flex max-w-3xl flex-col gap-[var(--space-8)]">
@@ -31,7 +37,8 @@ function IntegrationCategorySection({
             title={content.headline}
             description={content.supportingCopy}
             align="center"
-            className="gap-[var(--space-3)] [&_h2]:text-balance [&_p]:text-pretty"
+            tone={tone}
+            className="gap-[var(--space-3)]"
           />
 
           <ul

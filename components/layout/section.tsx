@@ -1,11 +1,12 @@
 import { cn } from "@/lib/utils";
 
-export type SectionBackground = "default" | "surface" | "transparent";
+export type SectionBackground = "default" | "surface" | "transparent" | "elevated";
 
 const backgroundClasses: Record<SectionBackground, string> = {
   default: "bg-neutral-background",
   surface: "bg-neutral-surface",
   transparent: "bg-transparent",
+  elevated: "bg-section-elevated text-section-elevated-body",
 };
 
 type SectionProps = React.ComponentProps<"section"> & {
@@ -24,7 +25,7 @@ function Section({
       className={cn(
         backgroundClasses[background],
         spacing &&
-          "py-[var(--space-16)] md:py-[var(--space-20)] lg:py-[var(--space-24)]",
+          "py-[var(--space-12)] sm:py-[var(--space-16)] md:py-[var(--space-20)] lg:py-[var(--space-24)]",
         className,
       )}
       {...props}

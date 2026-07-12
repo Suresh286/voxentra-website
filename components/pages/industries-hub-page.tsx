@@ -15,7 +15,7 @@ function IndustriesHubPage({ content }: IndustriesHubPageProps) {
       <FeatureGridSection
         id="overview"
         content={{ ...content.overview, items: content.overview.pillars }}
-        background="surface"
+        background="elevated"
       />
       <IndustriesGridSection content={content.industries} />
       <FeatureGridSection

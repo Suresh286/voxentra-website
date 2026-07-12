@@ -17,20 +17,20 @@ function IntegrationsPage({ content }: IntegrationsPageProps) {
         id="categories"
         content={{ ...content.categories, items: content.categories.items }}
         ariaLabel="Integration categories"
-        background="surface"
+        background="elevated"
       />
       <IntegrationCategorySection id="crm" content={content.crm} />
       <IntegrationCategorySection
         id="calendar"
         content={content.calendar}
-        background="surface"
+        background="elevated"
       />
       <IntegrationCategorySection id="communication" content={content.communication} />
       <FeatureGridSection
         id="api-webhooks"
         content={{ ...content.apiWebhooks, items: content.apiWebhooks.features }}
         columns={2}
-        background="surface"
+        background="elevated"
       />
       <CtaBandSection content={content.finalCta} />
     </>

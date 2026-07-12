@@ -37,6 +37,17 @@ export type HomeSection = {
   secondaryCta?: CtaLink;
 };
 
+export type HeadlinePart = {
+  text: string;
+  accent?: boolean;
+};
+
+export type HeroStat = {
+  value: string;
+  label: string;
+  icon?: "clock" | "globe" | "plug" | "shield";
+};
+
 export type TrustBarItem = {
   label: string;
 };
@@ -53,6 +64,7 @@ export type SolutionItem = {
   problem: string;
   aiEmployee: string;
   outcome: string;
+  tags?: readonly string[];
   cta: CtaLink;
 };
 
@@ -160,6 +172,13 @@ export type HeroVisualContent = {
 
 export type HomeContent = {
   hero: HomeSection & {
+    headlineLine1: string;
+    headlineLine2: string;
+    headlineParts: readonly HeadlinePart[];
+    specialtyPrefix: string;
+    specialtyTerms: readonly string[];
+    heroStats: readonly HeroStat[];
+    marqueeItems: readonly string[];
     capabilityIndicators: readonly TrustBarItem[];
     trustReassurance: string;
   };
@@ -176,6 +195,7 @@ export type HomeContent = {
     fieldLabels: AiWorkforceFieldLabels;
   };
   solutions: HomeSection & {
+    headlineParts: readonly HeadlinePart[];
     items: readonly SolutionItem[];
     fieldLabels: SolutionsFieldLabels;
   };

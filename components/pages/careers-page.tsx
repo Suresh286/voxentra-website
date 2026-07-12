@@ -17,7 +17,7 @@ function CareersPage({ content }: CareersPageProps) {
       <FeatureGridSection
         id="values"
         content={{ ...content.values, items: content.values.items }}
-        background="surface"
+        background="elevated"
       />
       <NarrativeSection
         id="hiring-philosophy"
@@ -26,7 +26,7 @@ function CareersPage({ content }: CareersPageProps) {
       <ChallengeSection
         content={content.futureOpportunities}
         id="future-opportunities"
-        background="surface"
+        background="elevated"
       />
       <CtaBandSection content={content.finalCta} />
     </>

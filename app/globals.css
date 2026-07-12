@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "../styles/tokens.css";
+@import "../styles/animations.css";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
@@ -18,6 +19,14 @@
   --color-neutral-card: var(--color-neutral-card);
   --color-neutral-border: var(--color-neutral-border);
   --color-neutral-divider: var(--color-neutral-divider);
+
+  /* Elevated sections */
+  --color-section-elevated: var(--color-section-elevated);
+  --color-section-elevated-heading: var(--color-section-elevated-heading);
+  --color-section-elevated-body: var(--color-section-elevated-body);
+  --color-section-elevated-muted: var(--color-section-elevated-muted);
+  --color-section-elevated-border: var(--color-section-elevated-border);
+  --color-section-elevated-card: var(--color-section-elevated-card);
 
   /* Voxentra text */
   --color-text-heading: var(--color-text-heading);
@@ -98,6 +107,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    overflow-x: clip;
   }
 
   body {
@@ -106,6 +116,7 @@
     min-height: 100dvh;
     font-size: var(--text-body-md);
     line-height: var(--leading-body);
+    overflow-x: clip;
   }
 
   h1,
@@ -158,12 +169,29 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+
+  .animate-marquee {
+    animation: none !important;
+  }
+
+  .scroll-reveal,
+  .hero-enter-item {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .hero-mesh-drift-a,
+  .hero-mesh-drift-b,
+  .workflow-progress-line {
+    animation: none !important;
+  }
 }
 
 @layer utilities {
   .text-display-xl {
     font-family: var(--font-display), system-ui, sans-serif;
-    font-size: var(--text-display-xl);
+    font-size: var(--text-display-xl-fluid);
     line-height: var(--leading-display);
     letter-spacing: var(--tracking-display);
     font-weight: 700;
@@ -172,7 +200,7 @@
 
   .text-display-lg {
     font-family: var(--font-display), system-ui, sans-serif;
-    font-size: var(--text-display-lg);
+    font-size: var(--text-display-lg-fluid);
     line-height: 1.08;
     letter-spacing: -0.025em;
     font-weight: 700;
@@ -181,7 +209,7 @@
 
   .text-display-md {
     font-family: var(--font-display), system-ui, sans-serif;
-    font-size: var(--text-display-md);
+    font-size: var(--text-display-md-fluid);
     line-height: 1.1;
     letter-spacing: -0.02em;
     font-weight: 600;
@@ -190,7 +218,7 @@
 
   .text-heading-lg {
     font-family: var(--font-display), system-ui, sans-serif;
-    font-size: var(--text-heading-lg);
+    font-size: var(--text-heading-lg-fluid);
     line-height: var(--leading-heading);
     letter-spacing: var(--tracking-heading);
     font-weight: 600;
@@ -248,5 +276,124 @@
 
   .text-muted {
     color: var(--color-text-muted);
+  }
+
+  .text-gradient-brand {
+    background-image: var(--gradient-brand-wordmark);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .bg-site-grid {
+    background-image: var(--gradient-glow), var(--pattern-grid);
+    background-size: auto, var(--pattern-grid-size);
+  }
+
+  .animate-marquee {
+    animation: marquee var(--marquee-duration) linear infinite;
+  }
+
+  .bg-section-elevated {
+    background-color: var(--color-section-elevated);
+    color: var(--color-section-elevated-body);
+  }
+
+  .text-section-elevated-body {
+    color: var(--color-section-elevated-body);
+  }
+
+  .text-section-elevated-heading {
+    color: var(--color-section-elevated-heading);
+  }
+
+  .text-section-elevated-muted {
+    color: var(--color-section-elevated-muted);
+  }
+
+  .border-section-elevated {
+    border-color: var(--color-section-elevated-border);
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* ─── Hero ambient motion ─────────────────────────────────────────── */
+  .hero-mesh-drift-a {
+    animation: hero-mesh-drift-a 14s var(--ease-standard) infinite;
+  }
+
+  .hero-mesh-drift-b {
+    animation: hero-mesh-drift-b 18s var(--ease-standard) infinite;
+  }
+
+  .hero-enter-item {
+    animation: scroll-reveal-in 0.75s var(--ease-entrance) both;
+  }
+
+  .hero-enter-item:nth-child(1) {
+    animation-delay: 0.05s;
+  }
+
+  .hero-enter-item:nth-child(2) {
+    animation-delay: 0.12s;
+  }
+
+  .hero-enter-item:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+
+  .hero-enter-item:nth-child(4) {
+    animation-delay: 0.28s;
+  }
+
+  .hero-enter-item:nth-child(5) {
+    animation-delay: 0.36s;
+  }
+
+  .hero-enter-item:nth-child(6) {
+    animation-delay: 0.44s;
+  }
+
+  /* ─── Scroll reveal (progressive: visible until JS enables motion) ─ */
+  .scroll-reveal {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  html[data-motion="on"] .scroll-reveal:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  html[data-motion="on"] .scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity var(--duration-entrance) var(--ease-entrance),
+      transform var(--duration-entrance) var(--ease-entrance);
+  }
+
+  .workflow-progress-line {
+    height: 2px;
+    top: -0.5px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgb(147 51 234 / 0.15) 15%,
+      rgb(147 51 234 / 0.85) 35%,
+      rgb(6 182 212 / 0.85) 65%,
+      rgb(147 51 234 / 0.15) 85%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: workflow-flow 5s linear infinite;
   }
 }

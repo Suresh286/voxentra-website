@@ -7,6 +7,13 @@ import { Card, CardContent } from "@/components/shared/card";
 import { Grid } from "@/components/shared/grid";
 import { Heading } from "@/components/shared/heading";
 import type { PagePricingTier, PageSection } from "@/content/types/pages";
+import {
+  bodyColorForTone,
+  cardClassesForTone,
+  elevatedSectionBorderClasses,
+  marketingElevatedSecondaryCtaClasses,
+  titleColorForTone,
+} from "@/lib/marketing-styles";
 import { cn } from "@/lib/utils";
 
 type PricingTiersSectionProps = {
@@ -15,11 +22,14 @@ type PricingTiersSectionProps = {
 };
 
 function PricingTiersSection({ content, id = "pricing-tiers" }: PricingTiersSectionProps) {
+  const tone = "elevated" as const;
+
   return (
     <Section
       id={id}
       aria-labelledby={`${id}-heading`}
-      background="transparent"
+      background="elevated"
+      className={elevatedSectionBorderClasses}
     >
       <Container>
         <div className="flex flex-col gap-[var(--space-10)] md:gap-[var(--space-12)]">
@@ -30,34 +40,44 @@ function PricingTiersSection({ content, id = "pricing-tiers" }: PricingTiersSect
             title={content.headline}
             description={content.supportingCopy}
             align="center"
-            className="mx-auto max-w-3xl gap-[var(--space-3)] [&_h2]:text-balance [&_p]:text-pretty"
+            tone={tone}
+            className="mx-auto max-w-3xl gap-[var(--space-3)]"
           />
 
           <Grid columns={3} className="gap-[var(--space-4)] md:gap-[var(--space-5)]">
             {content.items.map((tier) => (
-              <Card
-                key={tier.name}
-                className={cn(
-                  "flex h-full flex-col border-neutral-border/80 bg-[var(--surface-glass-panel)] backdrop-blur-sm",
-                  "transition-[border-color,box-shadow,transform] duration-[var(--duration-normal)]",
-                  "hover:-translate-y-0.5 hover:border-brand-primary/25 hover:shadow-[var(--shadow-glow-sm)]",
-                )}
-              >
+              <Card key={tier.name} className={cn("flex h-full flex-col", cardClassesForTone(tone))}>
                 <CardContent className="flex h-full flex-col gap-[var(--space-5)] p-[var(--space-6)]">
                   <div>
-                    <h3 className="font-display text-heading-sm font-semibold text-text-heading">
+                    <h3
+                      className={cn(
+                        "font-display text-heading-sm font-semibold",
+                        titleColorForTone(tone),
+                      )}
+                    >
                       {tier.name}
                     </h3>
-                    <p className="mt-[var(--space-2)] text-body-sm text-pretty text-text-secondary">
+                    <p
+                      className={cn(
+                        "mt-[var(--space-2)] text-body-sm text-pretty",
+                        bodyColorForTone(tone),
+                      )}
+                    >
                       {tier.description}
                     </p>
                   </div>
 
-                  <ul className="flex flex-1 flex-col gap-[var(--space-2)]" aria-label={`${tier.name} includes`}>
+                  <ul
+                    className="flex flex-1 flex-col gap-[var(--space-2)]"
+                    aria-label={`${tier.name} includes`}
+                  >
                     {tier.highlights.map((highlight) => (
                       <li
                         key={highlight}
-                        className="flex items-start gap-[var(--space-2)] text-body-sm text-text-body"
+                        className={cn(
+                          "flex items-start gap-[var(--space-2)] text-body-sm",
+                          bodyColorForTone(tone),
+                        )}
                       >
                         <span aria-hidden="true" className="text-status-success">
                           ✓
@@ -71,10 +91,7 @@ function PricingTiersSection({ content, id = "pricing-tiers" }: PricingTiersSect
                     voxentraVariant="outline"
                     nativeButton={false}
                     render={<Link href={tier.cta.href} />}
-                    className={cn(
-                      "h-10 w-full border-neutral-border bg-neutral-surface/50",
-                      "hover:border-brand-primary/50 hover:bg-interactive-selected",
-                    )}
+                    className={cn("h-10 w-full", marketingElevatedSecondaryCtaClasses)}
                   >
                     {tier.cta.label}
                   </Button>

@@ -15,7 +15,7 @@ function CustomersPage({ content }: CustomersPageProps) {
       <FeatureGridSection
         id="outcomes"
         content={{ ...content.outcomes, items: content.outcomes.items }}
-        background="surface"
+        background="elevated"
       />
       <FeatureGridSection
         id="workflows"
@@ -25,7 +25,7 @@ function CustomersPage({ content }: CustomersPageProps) {
       <FeatureGridSection
         id="industry-examples"
         content={{ ...content.industryExamples, items: content.industryExamples.items }}
-        background="surface"
+        background="elevated"
       />
       <StepsSection id="results-framework" content={content.resultsFramework} />
       <CtaBandSection content={content.finalCta} />

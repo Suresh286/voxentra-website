@@ -3,39 +3,35 @@ import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { navCtaClasses } from "@/components/layout/nav-styles";
-import { HeroVisual } from "@/components/sections/hero/hero-visual";
+import { HeroSpecialtyRotator } from "@/components/sections/hero/hero-specialty-rotator";
 import { Button } from "@/components/shared/button";
-import { Heading } from "@/components/shared/heading";
 import { homeContent } from "@/content/home";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 const secondaryCtaClasses = cn(
-  "h-11 w-full border-neutral-border bg-neutral-surface/50 px-6 sm:w-auto",
+  "h-12 w-full rounded-full border-neutral-border/80 bg-transparent px-8 sm:w-auto",
   "text-text-heading",
-  "hover:border-brand-primary/50 hover:bg-interactive-selected hover:text-text-heading",
+  "hover:border-brand-primary/50 hover:bg-brand-primary/5 hover:text-text-heading",
   "focus-visible:border-brand-primary/50",
 );
 
-function HeroCapabilityIndicators() {
-  const { capabilityIndicators } = homeContent.hero;
+function HeroStats() {
+  const { heroStats } = homeContent.hero;
 
   return (
     <ul
-      className="grid max-w-md grid-cols-2 gap-[var(--space-2)] sm:gap-[var(--space-3)]"
+      className="grid w-full max-w-3xl grid-cols-2 gap-[var(--space-4)] sm:gap-[var(--space-6)] sm:grid-cols-4 md:gap-[var(--space-8)]"
       aria-label="Platform capabilities"
     >
-      {capabilityIndicators.map((item) => (
-        <li key={item.label}>
-          <span
-            className={cn(
-              "inline-flex w-full items-center justify-center rounded-full border border-neutral-border/80",
-              "bg-neutral-card/50 px-3 py-2 text-center text-body-sm font-medium text-text-secondary backdrop-blur-sm",
-              "sm:justify-start sm:px-3.5 sm:text-left",
-            )}
-          >
-            {item.label}
-          </span>
+      {heroStats.map((stat) => (
+        <li key={stat.label} className="text-center">
+          <p className="font-display text-heading-md font-bold text-gradient-brand sm:text-display-md">
+            {stat.value}
+          </p>
+          <p className="mt-[var(--space-2)] text-label text-text-muted">
+            {stat.label}
+          </p>
         </li>
       ))}
     </ul>
@@ -49,78 +45,100 @@ function Hero() {
     <Section
       spacing={false}
       background="transparent"
-      className="relative overflow-hidden pt-[var(--space-16)] pb-[var(--space-20)] md:pt-[var(--space-20)] md:pb-[var(--space-24)] lg:pt-[var(--space-24)] lg:pb-[var(--space-32)]"
+      className="relative min-h-[calc(100dvh-var(--layout-navbar-height))] overflow-hidden pb-[var(--space-8)] sm:pb-[var(--space-12)]"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[image:var(--gradient-hero)]"
+        className="pointer-events-none absolute inset-0 bg-[image:var(--gradient-hero-mesh)]"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-24 left-0 h-64 w-64 rounded-full bg-brand-primary/10 blur-3xl"
+        className="hero-mesh-drift-a pointer-events-none absolute -left-24 top-1/4 h-80 w-80 rounded-full bg-brand-primary/20 blur-3xl"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-12 right-0 h-56 w-56 rounded-full bg-brand-accent/10 blur-3xl"
+        className="hero-mesh-drift-b pointer-events-none absolute -right-16 top-0 h-64 w-64 rounded-full bg-brand-accent/10 blur-3xl"
       />
 
-      <Container className="relative">
-        <div className="grid items-center gap-[var(--space-12)] lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:gap-[var(--space-16)] xl:gap-[var(--space-20)]">
-          <div className="flex max-w-xl flex-col gap-[var(--space-8)] lg:max-w-none lg:gap-[var(--space-10)]">
-            <Heading
-              variant="hero"
-              eyebrow={site.category}
-              title={hero.headline}
-              description={site.heroSubheadline}
-              className={cn(
-                "gap-[var(--space-4)] md:gap-[var(--space-5)]",
-                "[&_h1]:max-w-[11ch] [&_h1]:text-balance [&_h1]:leading-[1.08]",
-                "[&_p]:max-w-[38ch] [&_p]:text-pretty",
-              )}
-            />
+      <Container className="relative flex min-h-[calc(100dvh-var(--layout-navbar-height)-var(--space-8))] flex-col items-center justify-center pt-[var(--space-8)] sm:min-h-[calc(100dvh-var(--layout-navbar-height)-var(--space-12))] sm:pt-[var(--space-12)]">
+        <div className="hero-enter flex w-full max-w-4xl flex-col items-center gap-[var(--space-6)] text-center sm:gap-[var(--space-8)] md:gap-[var(--space-10)]">
+          {hero.eyebrow ? (
+            <p className="hero-enter-item inline-flex max-w-full items-center gap-[var(--space-2)] rounded-full border border-brand-primary/30 bg-brand-primary/10 px-[var(--space-3)] py-[var(--space-2)] text-center text-label text-brand-primary sm:px-[var(--space-4)]">
+              <span
+                aria-hidden="true"
+                className="size-2 rounded-full bg-status-success shadow-[0_0_8px_rgb(52_211_153_/_0.8)]"
+              />
+              {hero.eyebrow}
+            </p>
+          ) : null}
 
-            <div className="flex flex-col gap-[var(--space-5)]">
-              <div className="flex flex-col gap-[var(--space-3)] sm:flex-row sm:items-stretch">
-                <Button
-                  voxentraVariant="gradient"
-                  nativeButton={false}
-                  render={<Link href={hero.primaryCta.href} />}
-                  className={cn(navCtaClasses, "h-11 w-full px-6 sm:w-auto")}
-                >
-                  {hero.primaryCta.label}
-                  <span
-                    aria-hidden="true"
-                    className="transition-transform duration-[var(--duration-fast)] group-hover/cta:translate-x-0.5"
-                  >
-                    →
-                  </span>
-                </Button>
-
-                {hero.secondaryCta ? (
-                  <Button
-                    voxentraVariant="outline"
-                    nativeButton={false}
-                    render={<Link href={hero.secondaryCta.href} />}
-                    className={secondaryCtaClasses}
-                  >
-                    {hero.secondaryCta.label}
-                  </Button>
-                ) : null}
-              </div>
-
-              <p className="text-body-sm font-medium text-text-secondary">
-                {hero.trustReassurance}
-              </p>
-
-              <HeroCapabilityIndicators />
-            </div>
+          <div className="hero-enter-item flex w-full flex-col gap-[var(--space-2)] px-[var(--space-1)] sm:gap-[var(--space-3)]">
+            <h1 className="text-display-xl text-balance font-bold leading-[1.05] tracking-tight text-text-heading">
+              <span className="block">{hero.headlineLine1}</span>
+              <span className="block text-gradient-brand">{hero.headlineLine2}</span>
+            </h1>
+            <HeroSpecialtyRotator />
           </div>
 
-          <div className="w-full lg:justify-self-end">
-            <HeroVisual />
+          <p className="hero-enter-item max-w-2xl px-[var(--space-1)] text-body-md text-pretty text-text-secondary sm:text-body-lg">
+            {site.description}
+          </p>
+
+          <div className="hero-enter-item flex w-full flex-col items-center justify-center gap-[var(--space-3)] sm:flex-row">
+            {hero.primaryCta ? (
+              <Button
+                voxentraVariant="gradient"
+                nativeButton={false}
+                render={<Link href={hero.primaryCta.href} />}
+                className={cn(
+                  navCtaClasses,
+                  "h-12 w-full rounded-full px-8 shadow-[var(--shadow-glow-md)] sm:w-auto",
+                )}
+              >
+                {hero.primaryCta.label}
+                <span aria-hidden="true">→</span>
+              </Button>
+            ) : null}
+
+            {hero.secondaryCta ? (
+              <Button
+                voxentraVariant="outline"
+                nativeButton={false}
+                render={<Link href={hero.secondaryCta.href} />}
+                className={secondaryCtaClasses}
+              >
+                {hero.secondaryCta.label}
+              </Button>
+            ) : null}
+          </div>
+
+          <div className="hero-enter-item w-full">
+            <HeroStats />
           </div>
         </div>
+
+        <a
+          href="#stats-banner"
+          className={cn(
+            "mt-[var(--space-12)] inline-flex flex-col items-center gap-[var(--space-3)] text-body-sm text-text-muted",
+            "transition-colors duration-[var(--duration-fast)] hover:text-text-secondary",
+            "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-interactive-focus",
+          )}
+        >
+          <span
+            aria-hidden="true"
+            className="flex h-10 w-6 items-start justify-center rounded-full border border-neutral-border/80 pt-1.5"
+          >
+            <span className="block h-2 w-1 rounded-full bg-brand-primary/80" />
+          </span>
+          Scroll Down
+        </a>
       </Container>
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-neutral-background to-transparent"
+      />
     </Section>
   );
 }

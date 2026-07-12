@@ -15,7 +15,7 @@ function PlatformPage({ content }: PlatformPageProps) {
       <FeatureGridSection
         id="overview"
         content={{ ...content.overview, items: content.overview.pillars }}
-        background="surface"
+        background="elevated"
       />
       <FeatureGridSection
         id="architecture"
@@ -25,19 +25,19 @@ function PlatformPage({ content }: PlatformPageProps) {
       <FeatureGridSection
         id="ai-employees"
         content={{ ...content.aiEmployees, items: content.aiEmployees.roles }}
-        background="surface"
+        background="elevated"
       />
       <BadgeListSection
         id="integrations"
         content={{ ...content.integrations, items: content.integrations.categories }}
-        background="transparent"
+        background="elevated"
         ariaLabel="Integration categories"
       />
       <FeatureGridSection
         id="security"
         content={{ ...content.security, items: content.security.pillars }}
         columns={2}
-        background="surface"
+        background="elevated"
       />
       <FeatureGridSection
         id="dashboard"

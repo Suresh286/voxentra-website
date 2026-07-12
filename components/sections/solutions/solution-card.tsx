@@ -1,4 +1,13 @@
 import Link from "next/link";
+import {
+  Calendar,
+  Headphones,
+  Phone,
+  Target,
+  Users,
+  Workflow,
+  type LucideIcon,
+} from "lucide-react";
 
 import { Badge } from "@/components/shared/badge";
 import { Button } from "@/components/shared/button";
@@ -13,7 +22,24 @@ type SolutionCardProps = {
   item: SolutionItem;
   fieldLabels: SolutionsFieldLabels;
   headingId: string;
+  variant?: "workflow" | "showcase";
+  iconIndex?: number;
 };
+
+const showcaseIcons: LucideIcon[] = [
+  Target,
+  Headphones,
+  Calendar,
+  Phone,
+  Users,
+  Workflow,
+];
+
+const showcaseIconStyles = [
+  "bg-brand-primary/10 text-brand-primary",
+  "bg-brand-accent/10 text-brand-accent",
+  "bg-status-info/10 text-status-info",
+] as const;
 
 function WorkflowConnector() {
   return (
@@ -71,7 +97,93 @@ function WorkflowStep({
   );
 }
 
-function SolutionCard({ item, fieldLabels, headingId }: SolutionCardProps) {
+function SolutionShowcaseCard({
+  item,
+  headingId,
+  iconIndex = 0,
+}: {
+  item: SolutionItem;
+  headingId: string;
+  iconIndex?: number;
+}) {
+  const Icon = showcaseIcons[iconIndex % showcaseIcons.length];
+  const iconStyle = showcaseIconStyles[iconIndex % showcaseIconStyles.length];
+
+  return (
+    <Card
+      className={cn(
+        "group/solution h-full border-section-elevated bg-section-elevated-card shadow-[0_8px_30px_rgb(15_18_25_/_0.06)]",
+        "transition-[border-color,box-shadow,transform] duration-[var(--duration-normal)] ease-[var(--ease-standard)]",
+        "hover:-translate-y-1 hover:border-brand-primary/20 hover:shadow-[0_16px_40px_rgb(15_18_25_/_0.1)]",
+      )}
+    >
+      <CardContent className="flex h-full flex-col gap-[var(--space-5)] p-[var(--space-6)]">
+        <span
+          className={cn(
+            "inline-flex size-12 items-center justify-center rounded-xl",
+            iconStyle,
+          )}
+        >
+          <Icon aria-hidden="true" className="size-5" strokeWidth={1.75} />
+        </span>
+
+        <div>
+          <h3
+            id={headingId}
+            className="font-display text-heading-sm font-semibold text-section-elevated-heading"
+          >
+            {item.title}
+          </h3>
+          <p className="mt-[var(--space-2)] text-body-sm leading-relaxed text-pretty text-section-elevated-muted">
+            {item.description}
+          </p>
+        </div>
+
+        {item.tags?.length ? (
+          <ul className="mt-auto flex flex-wrap gap-[var(--space-2)]">
+            {item.tags.map((tag) => (
+              <li key={tag}>
+                <span className="inline-flex rounded-full border border-section-elevated bg-[var(--color-section-elevated)] px-3 py-1 text-body-sm text-section-elevated-muted">
+                  {tag}
+                </span>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+
+        <Link
+          href={item.cta.href}
+          className={cn(
+            "inline-flex items-center gap-[var(--space-2)] text-body-sm font-semibold text-brand-primary",
+            "transition-colors duration-[var(--duration-fast)] hover:text-brand-accent",
+            "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-interactive-focus",
+          )}
+        >
+          {item.cta.label}
+          <span aria-hidden="true">→</span>
+        </Link>
+      </CardContent>
+    </Card>
+  );
+}
+
+function SolutionCard({
+  item,
+  fieldLabels,
+  headingId,
+  variant = "workflow",
+  iconIndex = 0,
+}: SolutionCardProps) {
+  if (variant === "showcase") {
+    return (
+      <SolutionShowcaseCard
+        item={item}
+        headingId={headingId}
+        iconIndex={iconIndex}
+      />
+    );
+  }
+
   return (
     <Card
       className={cn(

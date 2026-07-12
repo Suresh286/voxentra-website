@@ -1,23 +1,27 @@
 import {
   AiEmployee,
   AiWorkforce,
+  FinalCta,
   Hero,
+  HowItWorks,
   Industries,
   Solutions,
-  TrustBar,
+  StatsBanner,
   TrustedBy,
 } from "@/components/sections";
 
 export default function Home() {
   return (
-    <main id="main-content" tabIndex={-1}>
+    <>
       <Hero />
-      <TrustBar />
+      <StatsBanner />
+      <Solutions />
       <TrustedBy />
       <AiEmployee />
       <AiWorkforce />
-      <Solutions />
       <Industries />
-    </main>
+      <HowItWorks />
+      <FinalCta />
+    </>
   );
 }

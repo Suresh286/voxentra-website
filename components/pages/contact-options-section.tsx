@@ -7,29 +7,32 @@ import { Card, CardContent } from "@/components/shared/card";
 import { Grid } from "@/components/shared/grid";
 import { Heading } from "@/components/shared/heading";
 import type { CtaLink, PageSection } from "@/content/types/pages";
+import {
+  bodyColorForTone,
+  cardClassesForTone,
+  elevatedSectionBorderClasses,
+  marketingElevatedSecondaryCtaClasses,
+  titleColorForTone,
+} from "@/lib/marketing-styles";
 import { cn } from "@/lib/utils";
 
 type InquirySectionProps = {
   content: PageSection & { points: readonly string[]; cta: CtaLink };
   id: string;
+  tone: "elevated";
 };
 
-function InquirySection({ content, id }: InquirySectionProps) {
+function InquirySection({ content, id, tone }: InquirySectionProps) {
   return (
     <div className="h-full">
-      <Card
-        className={cn(
-          "h-full border-neutral-border/80 bg-[var(--surface-glass-panel)] backdrop-blur-sm",
-          "transition-[border-color,box-shadow] duration-[var(--duration-normal)]",
-          "hover:border-brand-primary/20 hover:shadow-[var(--shadow-glow-sm)]",
-        )}
-      >
+      <Card className={cardClassesForTone(tone)}>
         <CardContent className="flex h-full flex-col gap-[var(--space-5)] p-[var(--space-6)] md:p-[var(--space-8)]">
           <Heading
             id={`${id}-heading`}
             variant="small"
             title={content.headline}
             description={content.supportingCopy}
+            tone={tone}
             className="gap-[var(--space-2)] [&_h3]:text-heading-sm"
           />
 
@@ -37,7 +40,10 @@ function InquirySection({ content, id }: InquirySectionProps) {
             {content.points.map((point) => (
               <li
                 key={point}
-                className="flex items-start gap-[var(--space-2)] text-body-sm text-text-body"
+                className={cn(
+                  "flex items-start gap-[var(--space-2)] text-body-sm",
+                  bodyColorForTone(tone),
+                )}
               >
                 <span aria-hidden="true" className="text-status-success">
                   ✓
@@ -51,10 +57,7 @@ function InquirySection({ content, id }: InquirySectionProps) {
             voxentraVariant="outline"
             nativeButton={false}
             render={<Link href={content.cta.href} />}
-            className={cn(
-              "h-10 w-full border-neutral-border bg-neutral-surface/50",
-              "hover:border-brand-primary/50 hover:bg-interactive-selected",
-            )}
+            className={cn("h-10 w-full", marketingElevatedSecondaryCtaClasses)}
           >
             {content.cta.label}
           </Button>
@@ -75,13 +78,15 @@ function ContactOptionsSection({
   demoRequest,
   businessInquiry,
 }: ContactOptionsSectionProps) {
+  const tone = "elevated" as const;
+
   return (
     <>
       <Section
         id="contact-options"
         aria-labelledby="contact-options-heading"
-        background="surface"
-        className="border-y border-neutral-divider"
+        background="elevated"
+        className={elevatedSectionBorderClasses}
       >
         <Container>
           <div className="flex flex-col gap-[var(--space-10)]">
@@ -92,25 +97,30 @@ function ContactOptionsSection({
               title={options.headline}
               description={options.supportingCopy}
               align="center"
-              className="mx-auto max-w-3xl gap-[var(--space-3)] [&_h2]:text-balance"
+              tone={tone}
+              className="mx-auto max-w-3xl gap-[var(--space-3)]"
             />
 
             <Grid columns={3} className="gap-[var(--space-4)]">
               {options.items.map((item) => (
-                <Card
-                  key={item.title}
-                  className="h-full border-neutral-border/80 bg-neutral-card/70"
-                >
+                <Card key={item.title} className={cardClassesForTone(tone)}>
                   <CardContent className="flex h-full flex-col gap-[var(--space-4)] p-[var(--space-5)]">
-                    <h3 className="font-display text-heading-sm font-semibold text-text-heading">
+                    <h3
+                      className={cn(
+                        "font-display text-heading-sm font-semibold",
+                        titleColorForTone(tone),
+                      )}
+                    >
                       {item.title}
                     </h3>
-                    <p className="flex-1 text-body-sm text-text-secondary">{item.description}</p>
+                    <p className={cn("flex-1 text-body-sm", bodyColorForTone(tone))}>
+                      {item.description}
+                    </p>
                     <Button
                       voxentraVariant="outline"
                       nativeButton={false}
                       render={<Link href={item.cta.href} />}
-                      className="h-10 w-full"
+                      className={cn("h-10 w-full", marketingElevatedSecondaryCtaClasses)}
                     >
                       {item.cta.label}
                     </Button>
@@ -122,11 +132,15 @@ function ContactOptionsSection({
         </Container>
       </Section>
 
-      <Section id="inquiries" background="transparent">
+      <Section
+        id="inquiries"
+        background="elevated"
+        className={elevatedSectionBorderClasses}
+      >
         <Container>
           <Grid columns={2} className="gap-[var(--space-6)]">
-            <InquirySection content={demoRequest} id="demo-request" />
-            <InquirySection content={businessInquiry} id="business-inquiry" />
+            <InquirySection content={demoRequest} id="demo-request" tone={tone} />
+            <InquirySection content={businessInquiry} id="business-inquiry" tone={tone} />
           </Grid>
         </Container>
       </Section>

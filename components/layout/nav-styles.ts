@@ -15,7 +15,7 @@ export const navTriggerClasses = cn(
 );
 
 export const navCtaClasses = cn(
-  "group/cta h-10 gap-2 px-5 text-body-sm font-semibold",
+  "group/cta h-10 max-w-full gap-2 rounded-full px-4 text-body-sm font-semibold sm:px-6",
   "border-0 bg-[image:var(--gradient-cta)] text-primary-foreground",
   "shadow-[var(--shadow-glow-sm)]",
   "hover:opacity-95 hover:shadow-[var(--shadow-glow-md)]",

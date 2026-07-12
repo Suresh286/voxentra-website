@@ -20,7 +20,7 @@ function IndustryDetailPage({ content }: IndustryDetailPageProps) {
           ...content.recommendedEmployees,
           items: content.recommendedEmployees.roles,
         }}
-        background="surface"
+        background="elevated"
       />
       <FeatureGridSection
         id="workflows"
@@ -30,7 +30,7 @@ function IndustryDetailPage({ content }: IndustryDetailPageProps) {
       <FeatureGridSection
         id="outcomes"
         content={{ ...content.outcomes, items: content.outcomes.items }}
-        background="surface"
+        background="elevated"
       />
       <FaqSection content={content.faq} />
       <CtaBandSection content={content.finalCta} />

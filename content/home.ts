@@ -2,10 +2,41 @@ import type { HomeContent } from "@/content/types/content";
 
 export const homeContent = {
   hero: {
-    eyebrow: "AI Employees for Modern Businesses",
-    headline: "Hire AI Employees That Never Miss a Conversation",
+    eyebrow: "Enterprise AI Workforce Platform",
+    headline: "AI Workforce for the Modern Business",
+    headlineLine1: "AI Workforce for the",
+    headlineLine2: "Modern Business",
+    headlineParts: [
+      { text: "AI Workforce for the " },
+      { text: "Modern Business", accent: true },
+    ],
+    specialtyPrefix: "We specialize in",
+    specialtyTerms: [
+      "Voice AI",
+      "Lead Qualification",
+      "Customer Support",
+      "Appointment Scheduling",
+      "Sales Follow-up",
+      "Call Center Automation",
+    ],
     supportingCopy:
       "Voice AI employees that answer calls, qualify leads, schedule appointments, and support customers around the clock.",
+    heroStats: [
+      { value: "24/7", label: "Availability", icon: "clock" },
+      { value: "20+", label: "Languages", icon: "globe" },
+      { value: "CRM", label: "Integrations", icon: "plug" },
+      { value: "Enterprise", label: "Security", icon: "shield" },
+    ],
+    marqueeItems: [
+      "Lead Qualification",
+      "Customer Support",
+      "Appointment Scheduling",
+      "Sales Follow-up",
+      "Reception",
+      "Internal Operations",
+      "Voice AI",
+      "Chat AI",
+    ],
     primaryCta: {
       label: "Book a Demo",
       href: "/demo",
@@ -260,8 +291,12 @@ export const homeContent = {
   },
 
   solutions: {
-    eyebrow: "Solutions",
-    headline: "Six jobs your AI employees can own.",
+    eyebrow: "What We Do",
+    headline: "Solutions That Drive Results",
+    headlineParts: [
+      { text: "Solutions That " },
+      { text: "Drive Results", accent: true },
+    ],
     supportingCopy:
       "Pick the workflow costing you time today. Voxentra deploys an AI employee trained for that exact job.",
     fieldLabels: {
@@ -279,6 +314,7 @@ export const homeContent = {
         aiEmployee: "Lead Qualification AI Employee",
         outcome:
           "Qualified leads are scored, logged in your CRM, and routed to sales with full context.",
+        tags: ["Voice AI", "CRM", "Salesforce"],
         cta: { label: "Learn More", href: "/solutions/sales" },
       },
       {
@@ -290,6 +326,7 @@ export const homeContent = {
         aiEmployee: "Customer Support AI Employee",
         outcome:
           "Common requests are resolved instantly; complex cases reach your team with full history.",
+        tags: ["Chat", "Helpdesk", "Zendesk"],
         cta: { label: "Learn More", href: "/solutions/customer-support" },
       },
       {
@@ -301,6 +338,7 @@ export const homeContent = {
         aiEmployee: "Appointment Booking AI Employee",
         outcome:
           "Meetings are confirmed, calendars updated, and reminders sent automatically.",
+        tags: ["Calendar", "Voice", "Reminders"],
         cta: { label: "Learn More", href: "/solutions/appointments" },
       },
       {
@@ -312,6 +350,7 @@ export const homeContent = {
         aiEmployee: "Sales AI Employee",
         outcome:
           "Every lead receives timely follow-up without adding headcount.",
+        tags: ["Sales", "Voice", "HubSpot"],
         cta: { label: "Learn More", href: "/solutions/sales" },
       },
       {
@@ -323,6 +362,7 @@ export const homeContent = {
         aiEmployee: "Reception AI Employee",
         outcome:
           "Every caller is greeted, routed correctly, and logged for follow-up.",
+        tags: ["Voice", "Routing", "Telephony"],
         cta: { label: "Learn More", href: "/solutions/call-center" },
       },
       {
@@ -334,6 +374,7 @@ export const homeContent = {
         aiEmployee: "Internal Operations AI Employee",
         outcome:
           "Schedules, reminders, and handoffs run automatically across your tools.",
+        tags: ["Workflows", "Slack", "Automation"],
         cta: { label: "Learn More", href: "/solutions/operations" },
       },
     ],
