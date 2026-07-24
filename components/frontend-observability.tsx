@@ -8,27 +8,34 @@ import {
 } from "@grafana/faro-web-sdk";
 import { TracingInstrumentation } from "@grafana/faro-web-tracing";
 
+/** Grafana Cloud Faro collector for Zuloo ai (Frontend Observability). */
+const FARO_COLLECTOR_URL =
+  process.env.NEXT_PUBLIC_FARO_URL?.trim() ||
+  "https://faro-collector-prod-ap-south-1.grafana.net/collect/bc5f7e64c1ced7230e74eb9a8d663498";
+
 /**
  * Initializes Grafana Faro (Frontend Observability) on the client only.
- * Set NEXT_PUBLIC_FARO_URL in Vercel / .env.local to enable.
  */
 function FrontendObservability() {
   useEffect(() => {
-    const url = process.env.NEXT_PUBLIC_FARO_URL?.trim();
+    if (typeof window === "undefined") {
+      return;
+    }
 
-    if (!url || faro.api) {
+    // Already initialized
+    if (faro.api) {
       return;
     }
 
     try {
       initializeFaro({
-        url,
+        url: FARO_COLLECTOR_URL,
         app: {
-          name: process.env.NEXT_PUBLIC_FARO_APP_NAME ?? "Zuloo ai",
-          version: process.env.NEXT_PUBLIC_FARO_APP_VERSION ?? "1.0.0",
+          name: process.env.NEXT_PUBLIC_FARO_APP_NAME?.trim() || "Zuloo ai",
+          version: process.env.NEXT_PUBLIC_FARO_APP_VERSION?.trim() || "1.0.0",
           environment:
-            process.env.NEXT_PUBLIC_VERCEL_ENV ??
-            process.env.NEXT_PUBLIC_FARO_ENVIRONMENT ??
+            process.env.NEXT_PUBLIC_VERCEL_ENV?.trim() ||
+            process.env.NEXT_PUBLIC_FARO_ENVIRONMENT?.trim() ||
             "production",
         },
         instrumentations: [
@@ -36,8 +43,8 @@ function FrontendObservability() {
           new TracingInstrumentation(),
         ],
       });
-    } catch {
-      // Never break the marketing site if observability fails to start.
+    } catch (error) {
+      console.warn("[Faro] Failed to initialize frontend observability", error);
     }
   }, []);
 
