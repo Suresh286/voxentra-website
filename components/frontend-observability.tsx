@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import {
   faro,
   getWebInstrumentations,
@@ -11,37 +12,39 @@ const FARO_URL =
   "https://faro-collector-prod-ap-south-1.grafana.net/collect/bc5f7e64c1ced7230e74eb9a8d663498";
 
 /**
- * Matches Grafana's official Next.js Faro pattern:
- * initialize synchronously in a client component (guarded by faro.api).
- * @see https://grafana.com/docs/grafana-cloud/monitor-applications/frontend-observability/get-started/instrument-nextjs/
+ * Grafana Faro client init.
+ * IMPORTANT: check `faro.config` (not `faro.api`) — api is a noop object before init.
  */
 function FrontendObservability() {
-  // Skip if already initialized (also avoids Strict Mode double-init errors)
-  if (faro.api) {
-    return null;
-  }
+  useEffect(() => {
+    // Already initialized
+    if (faro.config) {
+      return;
+    }
 
-  try {
-    initializeFaro({
-      url: process.env.NEXT_PUBLIC_FARO_URL || FARO_URL,
-      app: {
-        name: process.env.NEXT_PUBLIC_FARO_APP_NAME || "Zuloo ai",
-        version: process.env.NEXT_PUBLIC_FARO_APP_VERSION || "1.0.0",
-        environment:
-          process.env.NEXT_PUBLIC_VERCEL_ENV ||
-          process.env.NEXT_PUBLIC_FARO_ENVIRONMENT ||
-          "production",
-      },
-      instrumentations: [
-        ...getWebInstrumentations({
-          captureConsole: true,
-        }),
-        new TracingInstrumentation(),
-      ],
-    });
-  } catch {
-    // Faro already initialized or browser blocked it — never break the site.
-  }
+    try {
+      initializeFaro({
+        url: process.env.NEXT_PUBLIC_FARO_URL || FARO_URL,
+        app: {
+          name: process.env.NEXT_PUBLIC_FARO_APP_NAME || "Zuloo ai",
+          version: process.env.NEXT_PUBLIC_FARO_APP_VERSION || "1.0.0",
+          environment:
+            process.env.NEXT_PUBLIC_VERCEL_ENV ||
+            process.env.NEXT_PUBLIC_FARO_ENVIRONMENT ||
+            "production",
+        },
+        instrumentations: [
+          ...getWebInstrumentations(),
+          new TracingInstrumentation(),
+        ],
+      });
+
+      faro.api?.pushEvent("faro_boot");
+      console.info("[Faro] initialized — sending to Grafana Cloud");
+    } catch (error) {
+      console.warn("[Faro] init failed", error);
+    }
+  }, []);
 
   return null;
 }
