@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Footer, Navbar, SkipLink } from "@/components/layout";
+import { FrontendObservability } from "@/components/frontend-observability";
 import { site } from "@/content/site";
 import { getSiteOrigin } from "@/lib/site-url";
 import "./globals.css";
@@ -83,6 +84,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="flex min-h-dvh flex-col bg-neutral-background bg-site-grid">
+        <FrontendObservability />
         <SkipLink />
         <Navbar />
         <main id="main-content" tabIndex={-1} className="min-w-0 flex-1">
